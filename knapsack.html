@@ -39,17 +39,38 @@
                         <br>$200, 20kg
                     </div>
                 </div>
+                <div class="footer">
+                    Click item to move to knapsack.
+                </div>
             </div>
+
 
 
             <div class="setting" id="knapsack">
                 <div class="header">
                     <img src="resources/burglar.png">
+                    ($0, 0kg)
                 </div>
                 <div class="items">
                 </div>
+                <div class="footer">
+                    Click item to move to house.
+                </div>
             </div>
 
+            <!--
+  $('#house').on('click', .item function(event){ // when clicked while in house, move to sack
+    var target = $(event.target);
+    sack.append(target);
+    house.remove(target);
+  });
+  sackItems.on('click', function(event){ // when clicked while in sack, move to house
+    var target = $(event.target);
+    house.append(target);
+    sack.remove(target);
+  });
+
+-->
 
         </div>
     </body>

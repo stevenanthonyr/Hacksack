@@ -8,16 +8,17 @@
 }
 
 .header img {
-    width: 120px;
+    height: 100px;
 }
 
 .setting {
-    display: inline-block;
+    float: left;
+    display: inline;
     text-align: center;
+    margin: 5px;
 }
 
 .items {
-    display: inline-block;
     border: solid;
     border-width: 1px;
     width: 300px;
@@ -28,8 +29,10 @@
     display: inline-block;
     text-align: center;
     font-style: italic;
+    font-size: small;
+    margin: 1px;
 }
 
 .item img{
-    height: 90px;
+    width: 90px;
 }

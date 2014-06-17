@@ -1,20 +1,21 @@
-var maxWeight = $(.mainContainer).attr('data-maxweight');
-console.log(maxWeight);
-
 function updateKnapsack() {
 
 }
 
 $(function() {
-    var items = $(.item);
+    var items = $('.item');
     var weight = 0;
     var value = 0;
-    for (i = 0, i < items.length, i++) {
+    var maxWeight = parseInt($(".mainContainer").attr('data-maxweight'));
+    console.log(maxWeight);
+    for (i = 0; i < items.length; i++) {
+        console.log(items[i]);
         items[i].data('location', 'house');
     }
 
     function exceededCapacity() {
-
+        $('.alert').fadeIn(500);
+        $('.alert').fadeOut(500);
     }
 
     function steal(stealMe) {
@@ -37,9 +38,17 @@ $(function() {
         replaceMe.remove();
         $("#house").append(replaceMe);
         $(replaceMe).data('location', 'house');
-        }
     }
 
+    items.click(function(event) {
+        if ($(this).data('location') === 'house') {
+            steal($(this));
+        }
+        else if ($(this).data('location') === 'knapsack') {
+            unsteal($(this));
+        }
+        $("#knapsack.header").text("($" + value + ", " + weight + "kg)");
 
+    });
 
-}
+});

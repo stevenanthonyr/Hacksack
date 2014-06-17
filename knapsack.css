@@ -3,12 +3,22 @@
 
 }
 
+.alert {
+    position: absolute;
+    width: 320px;
+    height: 240px;
+    opacity: 0;
+}
+
 .header {
     align-content: center;
+    font-size: 1.5em;
+    text-align: center;
 }
 
 .header img {
     height: 100px;
+    vertical-align: middle;
 }
 
 .setting {

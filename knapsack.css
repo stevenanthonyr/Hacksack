@@ -7,13 +7,13 @@
     position: absolute;
     vertical-align: middle;
     text-align: center;
-    width: 320px;
-    height: 50px;
+    width: 200px;
+    height: 30px;
     display: none;
     pointer-events: none;
-    border-style: solid;
+    border-style: inset;
     background: black;
-    left: 180px;
+    left: 220px;
     top: 300px;
     color: white;
     padding-top: 10px;
@@ -32,11 +32,18 @@
     vertical-align: middle;
 }
 
+.footer {
+    vertical-align: middle;
+    text-align: center;
+}
+
 .setting {
     float: left;
     display: inline;
     text-align: center;
     margin: 5px;
+    width: 312px;
+    height: 432px;
 }
 
 .items {
@@ -53,7 +60,7 @@
     text-align: center;
     font-style: italic;
     font-size: small;
-    margin: 3px;
+    margin: 1px;
 }
 
 .item img{

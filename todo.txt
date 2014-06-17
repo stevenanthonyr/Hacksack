@@ -1,0 +1,6 @@
+- ratio button/display
+- edit images in html so that they're added by draw?
+- change style ()
+- look at empty.
+- store state
+- why does it spawn so high at the beginning?

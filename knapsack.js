@@ -9,27 +9,29 @@ $(function() {
     }
 
     function draw() {
-        //$(".items").empty(); //todo: rewrite this, same functionality
+        //$(".items").empty(); //todo: rewrite this, same functionality/
+        //to be fair, through, it technically works without parenthesis...
         for (i = 0; i < items.length; i++) {
             console.log(items[i])
             if ($(items[i]).data('location') == 'house') {
-                $("#house .items").append($(items[i]))
+                $("#house .items").append($(items[i])) //detach not needed because append just moves the element.
             }
             if ($(items[i]).data('location') == 'knapsack') {
                 $("#knapsack .items").append($(items[i]))
             }
         }
     }
-    //draw(); //this seemingly random draw is used to get the images in line with how they are in the beginning.
+    draw(); //this seemingly random draw is used to get the images in line with how they are in the beginning.
 
     function exceededCapacity() {
+        var sec = 1000; //second in milliseconds
         audio.play();
-        $('.alert').fadeIn(1000).delay(1000);
-        $('.alert').fadeOut(1000);
+        $('.alert').fadeIn(sec).delay(sec);
+        $('.alert').fadeOut(sec);
     }
 
     function updateKnapsack() {
-        //$("#knapsack .header .info").text("($" + value + ", " + weight + "kg)");
+        $("#knapsack .header .info").text("($" + value + ", " + weight + "kg)");
     }
 
     function steal(stealMe) {

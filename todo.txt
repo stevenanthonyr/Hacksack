@@ -4,3 +4,4 @@
 - look at empty.
 - store state
 - why does it spawn so high at the beginning?
+- simplify getter in js, add comments

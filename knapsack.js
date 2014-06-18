@@ -1,11 +1,11 @@
-var audio = new Audio('resources/sadtrombone.mp3');
+var audio = new Audio('resources/error.mp3');
 $(function() {
     var items = $('.item');
     var weight = 0;
     var value = 0;
     var maxWeight = parseInt($(".mainContainer").attr('data-maxweight'));
     for (i = 0; i < items.length; i++) {
-        $(items[i]).data('location', 'house'); //never forget, you need the selector!
+        $(items[i]).data('location', 'server'); //never forget, you need the selector!
     }
 
     function draw() {
@@ -13,8 +13,8 @@ $(function() {
         //to be fair, through, it technically works without parenthesis...
         for (i = 0; i < items.length; i++) {
             console.log(items[i])
-            if ($(items[i]).data('location') == 'house') {
-                $("#house .items").append($(items[i])) //detach not needed because append just moves the element.
+            if ($(items[i]).data('location') == 'server') {
+                $("#server .items").append($(items[i])) //detach not needed because append just moves the element.
             }
             if ($(items[i]).data('location') == 'knapsack') {
                 $("#knapsack .items").append($(items[i]))
@@ -49,15 +49,15 @@ $(function() {
 
     function unsteal(replaceMe) {
         weight -= parseInt($('img', replaceMe).attr('data-weight'));
-        //move item to the house
+        //move item to the server
         value -= parseInt($('img', replaceMe).attr('data-value'));
-        $(replaceMe).data('location', 'house');
+        $(replaceMe).data('location', 'server');
         updateKnapsack();
         draw();
     }
 
     items.click(function(event) {
-        if ($(this).data('location') == 'house') {
+        if ($(this).data('location') == 'server') {
             steal($(this));
         }
         else if ($(this).data('location') == 'knapsack') {

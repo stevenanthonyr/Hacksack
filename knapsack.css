@@ -13,7 +13,7 @@
     pointer-events: none;
     border-style: inset;
     background: black;
-    left: 220px;
+    left: 335px;
     top: 300px;
     color: white;
     padding-top: 10px;
@@ -42,27 +42,42 @@
     display: inline;
     text-align: center;
     margin: 5px;
-    width: 312px;
+    width: 420px;
     height: 432px;
 }
 
 .items {
-    border: solid;
-    border-width: 1px;
-    width: 300px;
-    height: 300px;
+    width: 417px;
+    height: 443px;
     margin: 5px;
     display: inline-block;
 }
 
-.item {
-    display: inline-block;
-    text-align: center;
-    font-style: italic;
-    font-size: small;
-    margin: 1px;
+#DUMMY img {
+    visibility: hidden;
 }
 
-.item img{
-    width: 90px;
+#server .items {
+    background-image: url('resources/serverviewlong.PNG');
+    background-color: #cccccc;
+}
+
+#knapsack .items {
+    background-image: url('resources/hackviewlong.PNG');
+    background-color: #cccccc;
+}
+
+.item:nth-child(-n+3) {
+    margin-top: 100px;
+}
+
+.item {
+    display: inline-block;
+    text-align: right;
+    font-style: italic;
+    font-size: small;
+    margin: 10px;
+    margin-left: 5px;
+    margin-right: 35px;
+    width: 80px;
 }

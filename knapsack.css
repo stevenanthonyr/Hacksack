@@ -67,6 +67,16 @@
     background-color: #cccccc;
 }
 
+#ratioToggle1 {
+    position: absolute;
+    left: 25px;
+    top: 180px;
+    background: transparent;
+    border: solid;
+    border-color: transparent;
+
+}
+
 .item:nth-child(-n+3) {
     margin-top: 100px;
 }

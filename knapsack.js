@@ -8,11 +8,21 @@ $(function() {
         $(items[i]).data('location', 'server'); //never forget, you need the selector!
     }
 
+    //Toggles between the ratio view and the value, weight view, depending on what the
+    //current view is.
+    function toggleRatios(isRatio) {
+        for (i = 0; i < items.length; i++) {
+            var itemWeight = parseInt($('img', items[i]).attr('data-weight'));
+            var itemValue = parseInt($('img', items[i]).attr('data-value'));
+            if (!isRatio) { $('span', items[i]).text(itemValue/itemWeight + " dollars/GB"); }
+            else { $('span', items[i]).text("$" + itemValue + ", " + itemWeight + "GB"); }
+        }
+    }
+
     function draw() {
         //$(".items").empty(); //todo: rewrite this, same functionality/
         //to be fair, through, it technically works without parenthesis...
         for (i = 0; i < items.length; i++) {
-            console.log(items[i])
             if ($(items[i]).data('location') == 'server') {
                 $("#server .items").append($(items[i])) //detach not needed because append just moves the element.
             }
@@ -65,6 +75,16 @@ $(function() {
         }
         $("#knapsack.header").text("($" + value + ", " + weight + "kg)");
 
+    });
+
+    //use a 'showingRatio' variable above for this instead
+    $('.ratioToggle').click(function(event) {
+        if ($('span', items[0]).text().indexOf('$') > -1) {
+            toggleRatios(false);
+        }
+        else {
+            toggleRatios(true);
+        }
     });
 
 });

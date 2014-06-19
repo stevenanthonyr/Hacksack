@@ -1,4 +1,5 @@
-var audio = new Audio('resources/error.mp3');
+var fullDriveAudio = new Audio('resources/error.mp3'); //outside of $(function() {...} so that is can start loading faster.
+var isRatio = false;
 $(function() {
     var items = $('.item');
     var weight = 0;
@@ -8,48 +9,68 @@ $(function() {
         $(items[i]).data('location', 'server'); //never forget, you need the selector!
     }
 
-    //Toggles between the ratio view and the value, weight view, depending on what the
-    //current view is.
-    function toggleRatios(isRatio) {
-        for (i = 0; i < items.length; i++) {
-            var itemWeight = parseInt($('img', items[i]).attr('data-weight'));
-            var itemValue = parseInt($('img', items[i]).attr('data-value'));
-            if (!isRatio) { $('span', items[i]).text(itemValue/itemWeight + " dollars/GB"); }
-            else { $('span', items[i]).text("$" + itemValue + ", " + itemWeight + "GB"); }
-        }
+//HELPER FUNCTIONS
+    //Parses the 'data-weight' attribute of images stored inside item divs.
+    function parseWeight(element) {
+        return parseInt($('img', element).attr('data-weight'));
     }
 
-    function draw() {
-        //$(".items").empty(); //todo: rewrite this, same functionality/
-        //to be fair, through, it technically works without parenthesis...
-        for (i = 0; i < items.length; i++) {
-            if ($(items[i]).data('location') == 'server') {
-                $("#server .items").append($(items[i])) //detach not needed because append just moves the element.
-            }
-            if ($(items[i]).data('location') == 'knapsack') {
-                $("#knapsack .items").append($(items[i]))
-            }
-        }
-    }
-    draw(); //this seemingly random draw is used to get the images in line with how they are in the beginning.
-
-    function exceededCapacity() {
-        var sec = 1000; //second in milliseconds
-        audio.play();
-        $('.alert').fadeIn(sec).delay(sec);
-        $('.alert').fadeOut(sec);
+    //Parses the 'data-value' attribute of images stored inside item divs.
+    function parseValue(element) {
+        return parseInt($('img', element).attr('data-value'));
     }
 
+    //Updates the knapsack information in the knapsack header based on what objects are currently in it.
     function updateKnapsack() {
         $("#knapsack .header .info").text("($" + value + ", " + weight + "kg)");
     }
 
+    //Draws the items inside of the server/knapsack divs. Used to ensure that
+    //items appear in the same index when put back into the house.
+    function draw() {
+        for (i = 0; i < items.length; i++) {
+            var $item = $(items[i])
+            var locationTag = ""
+            $item.data('location') == 'server' ? locationTag = "#server" : locationTag = "#knapsack";
+            $(locationTag + " .items").append($item) //detach not needed because append just moves the element.
+        }
+    }
+
+//BUTTON FUNCTIONS
+    //Toggles between the ratio view and the value, weight view, depending on what the
+    //current view is.
+    function toggleRatios(isRatioClass) {
+        $('.item').each(function(i, e) {
+            var itemWeight = parseWeight(e);
+            var itemValue = parseValue(e);
+            var text = "";
+            //if in ratio form, turn it into (value, weight) form, and vice versa.
+            ((isRatio) ? text= "$" + itemValue + ", " + itemWeight + "GB" : text = itemValue/itemWeight + " dol/GB")
+            $('span', e).text(text);
+        });
+        isRatio = !isRatio;
+    }
+
+    //displays a help message when the help button is pressed.
+    function help() {
+        alert("Steal files from the server using the strategies mentioned above in the explanation. Keep in mind that the burglar only has a flash drive capable of storing 20GB.\n\n\nCoded by Steven A. Rivera with inspiration from a similar knapsack program coded by Chris Terman.");
+    }
+
+//SIMULATION FUNCTIONS
+    //Alerts the user that the knapsack has exceeded capacity.
+    function exceededCapacity() {
+        var sec = 1000; //second in milliseconds
+        fullDriveAudio.play();
+        $('.alert').fadeIn(sec).delay(sec).fadeOut(sec);
+    }
+
+    //Moves an object from the server to the knapsack.
     function steal(stealMe) {
-        var newWeight = weight + parseInt($('img', stealMe).attr('data-weight'));
+        var newWeight = weight + parseWeight(stealMe);
         if (newWeight > maxWeight) {exceededCapacity();}
         else {
             //move item to the knapsack
-            value += parseInt($('img', stealMe).attr('data-value'));
+            value += parseValue(stealMe);
             weight = newWeight;
             $(stealMe).data('location', 'knapsack');
             updateKnapsack();
@@ -57,34 +78,27 @@ $(function() {
         }
     }
 
+    //Moves an object from the knapsack to the server.
     function unsteal(replaceMe) {
-        weight -= parseInt($('img', replaceMe).attr('data-weight'));
-        //move item to the server
-        value -= parseInt($('img', replaceMe).attr('data-value'));
+        weight -= parseWeight(replaceMe);
+        value -= parseValue(replaceMe);
         $(replaceMe).data('location', 'server');
         updateKnapsack();
         draw();
     }
 
+    draw(); //this seemingly random draw is used to get the images in line with how they are in the beginning.
+
     items.click(function(event) {
-        if ($(this).data('location') == 'server') {
-            steal($(this));
-        }
-        else if ($(this).data('location') == 'knapsack') {
-            unsteal($(this));
-        }
-        $("#knapsack.header").text("($" + value + ", " + weight + "kg)");
+        //server is the game server on the left side of the screen.
+        ($(this).data('location') == 'server') ? steal($(this)) : unsteal($(this));
+        updateKnapsack();
 
     });
 
     //use a 'showingRatio' variable above for this instead
-    $('.ratioToggle').click(function(event) {
-        if ($('span', items[0]).text().indexOf('$') > -1) {
-            toggleRatios(false);
-        }
-        else {
-            toggleRatios(true);
-        }
-    });
+    $('.ratioToggle').click(function(event) { toggleRatios(isRatio); });
+    $('.help').click(function(event) { help(); });
+//    $('.reset').click(function(event) { reset(); });
 
 });

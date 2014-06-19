@@ -11,7 +11,7 @@
     height: 30px;
     display: none;
     pointer-events: none;
-    border-style: inset;
+    border-style: solid;
     background: black;
     left: 335px;
     top: 300px;
@@ -70,12 +70,33 @@
 #ratioToggle1 {
     position: absolute;
     left: 25px;
-    top: 180px;
+    top: 179px;
     background: transparent;
     border: solid;
     border-color: transparent;
 
 }
+
+.help {
+    position: absolute;
+    left: 782px;
+    top: 179px;
+    background: transparent;
+    border: solid;
+    border-color: transparent;
+}
+
+/*
+.reset {
+    position: absolute;
+    left: 460px;
+    top: 179px;
+    background: transparent;
+    border: solid;
+    border-color: transparent;
+    display: none;
+}
+*/
 
 .item:nth-child(-n+3) {
     margin-top: 100px;
@@ -90,4 +111,8 @@
     margin-left: 5px;
     margin-right: 35px;
     width: 80px;
+}
+
+#tableHeader {
+    text-align: left;
 }

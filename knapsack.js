@@ -47,7 +47,8 @@ $(function() {
             var itemValue = parseValue(e);
             var text = "";
             //if in ratio form, turn it into (value, weight) form, and vice versa.
-            ((isRatio) ? text= "$" + itemValue + ", " + itemWeight + "GB" : text = itemValue/itemWeight + " dol/GB")
+            if (isRatio) { text= "$" + itemValue + ", " + itemWeight + "GB" }
+            else { text = itemValue/itemWeight + " dol/GB" }
             $('span', e).text(text);
         });
         isRatio = !isRatio;
@@ -78,7 +79,10 @@ $(function() {
     function exceededCapacity() {
         var sec = 1000; //second in milliseconds
         fullDriveAudio.play();
-        $('.alert').fadeIn(sec/2).delay(1.5*sec).fadeOut(sec/2);
+        $('.alert').click(function(event) { $('.alert img').hide(); });
+//        $('.alert').fadeIn(sec/2).delay(1.5*sec).fadeOut(sec/2); this can lead to tons of chaining of alerts.
+        $('.alert').fadeIn(sec/2);
+        setTimeout(function(){ $('.alert').fadeOut(sec/2); }, 1.5*sec);
     }
 
     //Moves an object from the server to the knapsack.

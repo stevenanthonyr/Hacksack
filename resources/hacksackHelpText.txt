@@ -1,0 +1,20 @@
+  /\  /\__ _  ___| | _____  __ _  ___| | __
+ / /_/ / _` |/ __| |/ / __|/ _` |/ __| |/ /
+/ __  / (_| | (__|   <\__ \ (_| | (__|   < 
+\/ /_/ \__,_|\___|_|\_\___/\__,_|\___|_|\_\
+--------------------------------------------
+
+Steal files from the server using the strategies mentioned above in the 
+explanation. Keep in mind that the burglar only has a flash drive capable 
+of storing 20GB.
+
+
+
+
+Click on this window to exit.
+
+
+
+
+Coded by Steven A. Rivera with inspiration from a similar knapsack program 
+coded by Professor Chris Terman.

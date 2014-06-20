@@ -1,64 +1,74 @@
 var fullDriveAudio = new Audio('resources/error.mp3'); //outside of $(function() {...} so that is can start loading faster.
 var isRatio = false;
 
-//HELPER & INIT FUNCTIONS
-//Parses the 'data-weight' attribute of images stored inside item divs.
-function parseWeight(element) {
-    return parseInt($('img', element).attr('data-weight'));
-}
+////Checks if the user has local storage.
+//function pageInit() {
+//    if (localStorage.getItem('ifStorage') == 'yes') {
+//        var serverData = localStorage.getItem('server');
+//        var hackerData = localStorage.getItem('knapsack');
+//
+//        if (serverData) {
+//            $('#server').html(serverData);
+//        }
+//
+//        if (hackerData) {
+//            $('#knapsack').html(hackerData);
+//            $('.item').each(function(i, e){
+//                if ($('e').data('location') == 'knapsack') {
+//                    weight += parseInt($('img', e).attr('data-weight'));
+//                    value += parseInt($('img', e).attr('data-value'));
+//                }
+//            });
+//        }
+//    }
+//    else {
+//        var items = $('.item');
+//        for (i = 0; i < items.length; i++) {
+//            $(items[i]).data('location', 'server'); //never forget, you need the selector!
+//        }
+//
+//        localStorage.setItem('ifStorage', 'yes');
+//    }
+//}
+//
+//pageInit();
 
-//Parses the 'data-value' attribute of images stored inside item divs.
-function parseValue(element) {
-    return parseInt($('img', element).attr('data-value'));
-}
-
-//Updates the knapsack information in the knapsack header based on what objects are currently in it.
-function updateKnapsack() {
-    $("#knapsack .header .info").text("($" + value + ", " + weight + "kg)");
-}
-
-//Draws the items inside of the server/knapsack divs. Used to ensure that
-//items appear in the same index when put back into the house.
-function draw() {
-    for (i = 0; i < items.length; i++) {
-        var $item = $(items[i])
-        var locationTag = ""
-        $item.data('location') == 'server' ? locationTag = "#server" : locationTag = "#knapsack";
-        $(locationTag + " .items").append($item) //detach not needed because append just moves the element.
-    }
-}
-
-//Checks if the user has local storage.
-function pageInit() {
+$(function() {
+    //Global-ish Variables
     var items = $('.item');
     var weight = 0;
     var value = 0;
     var maxWeight = parseInt($(".mainContainer").attr('data-maxweight'));
-
-    if (localStorage.getItem('ifStorage') == 'yes') {
-        var serverData = localStorage.getItem('server');
-        var hackerData = localStorage.getItem('knapsack');
-        if (serverData) {
-            $('#server').html(serverData);
-        }
-        if (hackerData) {
-            $('#knapsack').html(hackerData);
-            $('.item').each(function(i, e){
-                if ($('e').data('location') == 'knapsack') {
-                    weight += parseWeight(e);
-                    value += parseValue(e);
-                }
-            });
-        }
-    }
-    else {
-        for (i = 0; i < items.length; i++) {
+    for (i = 0; i < items.length; i++) {
             $(items[i]).data('location', 'server'); //never forget, you need the selector!
+    }
+
+    //HELPER & INIT FUNCTIONS
+    //Parses the 'data-weight' attribute of images stored inside item divs.
+    function parseWeight(element) {
+        return parseInt($('img', element).attr('data-weight'));
+    }
+
+    //Parses the 'data-value' attribute of images stored inside item divs.
+    function parseValue(element) {
+        return parseInt($('img', element).attr('data-value'));
+    }
+
+    //Updates the knapsack information in the knapsack header based on what objects are currently in it.
+    function updateKnapsack() {
+        $("#knapsack .header .info").text("($" + value + ", " + weight + "kg)");
+    }
+
+    //Draws the items inside of the server/knapsack divs. Used to ensure that
+    //items appear in the same index when put back into the house.
+    function draw() {
+        for (i = 0; i < items.length; i++) {
+            var $item = $(items[i])
+            var locationTag = ""
+            $item.data('location') == 'server' ? locationTag = "#server" : locationTag = "#knapsack";
+            $(locationTag + " .items").append($item) //detach not needed because append just moves the element.
         }
     }
-}
-
-$(function() {
 
 //BUTTON FUNCTIONS
     //Toggles between the ratio view and the value, weight view, depending on what the

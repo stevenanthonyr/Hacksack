@@ -7,6 +7,17 @@
         <link rel="stylesheet" type="text/css" href="knapsack.css">
     </head>
     <body>
+<!--
+        <h2>Hacksack</h2>
+        <p>You are a hacker who just infiltrated the most evil corporation in the world. You want to take some of their files to sell their secrets on the black market, but you only brought your 20GB flash drive with you. How can we decide what we should take?</p>
+        <p>Let's try out three possible strategies. Considering the items remaining in the server that will still fit in the flash drive, you will select your next item based on one of the following:</p>
+        <ol>
+        <li>"Max Value" - choose the item with the greatest value</li>
+        <li>"Min Weight" - choose the item with the least weight</li>
+        <li>"Max Value/Weight" - choose the item with the largest value-to-weight ratio</li>
+        </ol>
+        <p>Try out each strategy using the simulation below and record the total value of all the items in the flash drive.</p>
+-->
         <div class="mainContainer" data-maxweight="20">
             <div class='alert'>
                 <img src="resources/alert.png">
@@ -75,35 +86,6 @@
                     Click item to move back to servers.
                 </div>
             </div>
-<!-- idea: have the table reveal value and weight cells as strategies are correctly followed.
-            <table style="width:300px">
-                <tr id='tableHeader'>
-                    <th>Strategy</th>
-                    <th>Value</th>
-                    <th>Weight</th>
-                </tr>
-                <tr id='s1Table'>
-                    <td>Max Value</td>
-                    <td>$200</td>
-                    <td>20GB</td>
-                </tr>
-                <tr id='s2Table'>
-                    <td>Min Weight</td>
-                    <td>$170</td>
-                    <td>16GB</td>
-                </tr>
-                <tr id='s3Table'>
-                    <td>Max Value/Weight</td>
-                    <td>$255</td>
-                    <td>17GB</td>
-                </tr>
-                <tr id='s4Table'>
-                    <td>Optimal Choices</td>
-                    <td>$275</td>
-                    <td>20GB</td>
-                </tr>
-            </table>
--->
         </div>
     </body>
 </html>

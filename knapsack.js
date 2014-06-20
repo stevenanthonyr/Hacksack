@@ -2,7 +2,7 @@ var fullDriveAudio = new Audio('resources/error.mp3'); //outside of $(function()
 var isRatio = false;
 
 $(function() {
-    //Global-ish Variables
+//Global-ish Variables
     var items = $('.item');
     var weight = 0;
     var value = 0;

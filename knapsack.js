@@ -86,6 +86,7 @@ $(function() {
     }
 
     //Moves an object from the server to the knapsack.
+    //@param: stealMe - object to be moved.
     function steal(stealMe) {
         var newWeight = weight + parseWeight(stealMe);
         if (newWeight > maxWeight) {exceededCapacity();}
@@ -100,6 +101,7 @@ $(function() {
     }
 
     //Moves an object from the knapsack to the server.
+    //@param: unsteal - object to be moved.
     function unsteal(replaceMe) {
         weight -= parseWeight(replaceMe);
         value -= parseValue(replaceMe);

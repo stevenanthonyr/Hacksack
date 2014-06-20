@@ -1,5 +1,0 @@
-- ratio button/display
-- store state
-- simplify getter in js, add comments
-- drag and drop for 'files'
-- maybe d3 stuff, idk homie

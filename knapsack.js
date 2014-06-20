@@ -1,40 +1,64 @@
 var fullDriveAudio = new Audio('resources/error.mp3'); //outside of $(function() {...} so that is can start loading faster.
 var isRatio = false;
-$(function() {
+
+//HELPER & INIT FUNCTIONS
+//Parses the 'data-weight' attribute of images stored inside item divs.
+function parseWeight(element) {
+    return parseInt($('img', element).attr('data-weight'));
+}
+
+//Parses the 'data-value' attribute of images stored inside item divs.
+function parseValue(element) {
+    return parseInt($('img', element).attr('data-value'));
+}
+
+//Updates the knapsack information in the knapsack header based on what objects are currently in it.
+function updateKnapsack() {
+    $("#knapsack .header .info").text("($" + value + ", " + weight + "kg)");
+}
+
+//Draws the items inside of the server/knapsack divs. Used to ensure that
+//items appear in the same index when put back into the house.
+function draw() {
+    for (i = 0; i < items.length; i++) {
+        var $item = $(items[i])
+        var locationTag = ""
+        $item.data('location') == 'server' ? locationTag = "#server" : locationTag = "#knapsack";
+        $(locationTag + " .items").append($item) //detach not needed because append just moves the element.
+    }
+}
+
+//Checks if the user has local storage.
+function pageInit() {
     var items = $('.item');
     var weight = 0;
     var value = 0;
     var maxWeight = parseInt($(".mainContainer").attr('data-maxweight'));
-    for (i = 0; i < items.length; i++) {
-        $(items[i]).data('location', 'server'); //never forget, you need the selector!
-    }
 
-//HELPER FUNCTIONS
-    //Parses the 'data-weight' attribute of images stored inside item divs.
-    function parseWeight(element) {
-        return parseInt($('img', element).attr('data-weight'));
-    }
-
-    //Parses the 'data-value' attribute of images stored inside item divs.
-    function parseValue(element) {
-        return parseInt($('img', element).attr('data-value'));
-    }
-
-    //Updates the knapsack information in the knapsack header based on what objects are currently in it.
-    function updateKnapsack() {
-        $("#knapsack .header .info").text("($" + value + ", " + weight + "kg)");
-    }
-
-    //Draws the items inside of the server/knapsack divs. Used to ensure that
-    //items appear in the same index when put back into the house.
-    function draw() {
-        for (i = 0; i < items.length; i++) {
-            var $item = $(items[i])
-            var locationTag = ""
-            $item.data('location') == 'server' ? locationTag = "#server" : locationTag = "#knapsack";
-            $(locationTag + " .items").append($item) //detach not needed because append just moves the element.
+    if (localStorage.getItem('ifStorage') == 'yes') {
+        var serverData = localStorage.getItem('server');
+        var hackerData = localStorage.getItem('knapsack');
+        if (serverData) {
+            $('#server').html(serverData);
+        }
+        if (hackerData) {
+            $('#knapsack').html(hackerData);
+            $('.item').each(function(i, e){
+                if ($('e').data('location') == 'knapsack') {
+                    weight += parseWeight(e);
+                    value += parseValue(e);
+                }
+            });
         }
     }
+    else {
+        for (i = 0; i < items.length; i++) {
+            $(items[i]).data('location', 'server'); //never forget, you need the selector!
+        }
+    }
+}
+
+$(function() {
 
 //BUTTON FUNCTIONS
     //Toggles between the ratio view and the value, weight view, depending on what the
@@ -53,7 +77,11 @@ $(function() {
 
     //displays a help message when the help button is pressed.
     function help() {
-        alert("Steal files from the server using the strategies mentioned above in the explanation. Keep in mind that the burglar only has a flash drive capable of storing 20GB.\n\n\nCoded by Steven A. Rivera with inspiration from a similar knapsack program coded by Chris Terman.");
+        var sec = 1000; //second in milliseconds
+        $('.helpWindow').fadeIn(sec);
+        $('.helpWindow').click(function(event) {
+            $('.helpWindow').hide();
+        });
     }
 
     //Resets the state of the board to the introductory state.
@@ -72,7 +100,7 @@ $(function() {
     function exceededCapacity() {
         var sec = 1000; //second in milliseconds
         fullDriveAudio.play();
-        $('.alert').fadeIn(sec).delay(sec).fadeOut(sec);
+        $('.alert').fadeIn(sec/2).delay(1.5*sec).fadeOut(sec/2);
     }
 
     //Moves an object from the server to the knapsack.

@@ -8,7 +8,12 @@
     </head>
     <body>
         <div class="mainContainer" data-maxweight="20">
-            <div class='alert'>Your flash drive is full!</div>
+            <div class='alert'>
+                <img src="resources/alert.png">
+            </div>
+            <div class='helpWindow'>
+                <img src="resources/helpdialog.png">
+            </div>
             <div class="setting" id="server">
                 <div class="header">
                     <img class='avatar' src="resources/servers.png">
@@ -70,7 +75,7 @@
                     Click item to move back to servers.
                 </div>
             </div>
-
+<!-- idea: have the table reveal value and weight cells as strategies were correctly followed.
             <table style="width:300px">
                 <tr id='tableHeader'>
                     <th>Strategy</th>
@@ -98,6 +103,7 @@
                     <td>20GB</td>
                 </tr>
             </table>
+-->
         </div>
     </body>
 </html>

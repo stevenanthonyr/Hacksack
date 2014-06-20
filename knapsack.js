@@ -24,7 +24,7 @@ $(function() {
 
     //Updates the knapsack information in the knapsack header based on what objects are currently in it.
     function updateKnapsack() {
-        $("#knapsack .header .info").text("($" + value + ", " + weight + "kg)");
+        $("#knapsack .header .info").text("($" + value + ", " + weight + "GB)");
     }
 
     //Draws the items inside of the server/knapsack divs. Used to ensure that

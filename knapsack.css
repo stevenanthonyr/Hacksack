@@ -27,7 +27,7 @@
     text-align: center;
 }
 
-.header img {
+.header .avatar{
     height: 100px;
     vertical-align: middle;
 }
@@ -86,7 +86,6 @@
     border-color: transparent;
 }
 
-/*
 .reset {
     position: absolute;
     left: 460px;
@@ -94,9 +93,7 @@
     background: transparent;
     border: solid;
     border-color: transparent;
-    display: none;
 }
-*/
 
 .item:nth-child(-n+3) {
     margin-top: 100px;

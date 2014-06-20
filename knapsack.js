@@ -56,6 +56,17 @@ $(function() {
         alert("Steal files from the server using the strategies mentioned above in the explanation. Keep in mind that the burglar only has a flash drive capable of storing 20GB.\n\n\nCoded by Steven A. Rivera with inspiration from a similar knapsack program coded by Chris Terman.");
     }
 
+    //Resets the state of the board to the introductory state.
+    function reset() {
+        //reset the item location to server so that they reset position upon the draw() call.
+        $('.item').each(function(i, e){ $(e).data('location', 'server'); });
+        draw();
+        value = 0;
+        weight = 0;
+        updateKnapsack();
+
+    }
+
 //SIMULATION FUNCTIONS
     //Alerts the user that the knapsack has exceeded capacity.
     function exceededCapacity() {
@@ -99,6 +110,6 @@ $(function() {
     //use a 'showingRatio' variable above for this instead
     $('.ratioToggle').click(function(event) { toggleRatios(isRatio); });
     $('.help').click(function(event) { help(); });
-//    $('.reset').click(function(event) { reset(); });
+    $('.reset').click(function(event) { reset(); });
 
 });

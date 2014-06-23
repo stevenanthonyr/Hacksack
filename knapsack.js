@@ -5,7 +5,7 @@ $(function() {
 //Global-ish Variables
     var items = $('.item');
     var weight = 0;
-    var value = 0;
+    var value = 0; //fun.
     var maxWeight = parseInt($(".mainContainer").attr('data-maxweight'));
     for (i = 0; i < items.length; i++) {
             $(items[i]).data('location', 'server'); //never forget, you need the selector!
